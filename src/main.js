@@ -1,8 +1,8 @@
-import { MainPage, ProfilePage, LoginPage, ErrorPage } from "./pages";
+import { HomePage, ProfilePage, LoginPage, NotFoundPage } from "./pages";
 
 document.body.innerHTML = `
-  ${MainPage()}
+  ${HomePage()}
   ${ProfilePage()}
   ${LoginPage()}
-  ${ErrorPage()}
+  ${NotFoundPage()}
 `;
