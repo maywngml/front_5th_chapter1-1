@@ -13,7 +13,13 @@ const App = () => {
 };
 
 const render = () => {
-  document.body.innerHTML = App();
+  const app = App();
+
+  document.body.innerHTML = app.template();
+
+  if (app.setEventHandlers) {
+    app.setEventHandlers();
+  }
 
   document.querySelectorAll("a").forEach((el) => {
     el.addEventListener("click", (e) => {
