@@ -26,12 +26,24 @@ const render = () => {
       e.preventDefault();
       const newPathName = e.target.href.replace(location.origin, "");
       history.pushState(null, "", newPathName);
-      render();
     });
   });
 };
 
+const originalPushState = history.pushState;
+
+history.pushState = function (...args) {
+  originalPushState.apply(this, args);
+
+  const event = new Event("pushstate");
+  window.dispatchEvent(event);
+};
+
 window.addEventListener("popstate", () => {
+  render();
+});
+
+window.addEventListener("pushstate", () => {
   render();
 });
 
