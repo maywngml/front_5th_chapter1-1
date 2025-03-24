@@ -20,3 +20,7 @@ export const getUser = (): User | null => {
   }
   return parsedUser;
 };
+
+export const updateUser = (user: User) => {
+  localStorage.setItem("user", JSON.stringify(user));
+};
