@@ -13,6 +13,7 @@ const App = () => {
       return ProfilePage();
     } else {
       history.pushState(null, "", "/login");
+      return;
     }
   } else {
     return NotFoundPage();
@@ -22,9 +23,10 @@ const App = () => {
 const render = () => {
   const app = App();
 
-  document.body.innerHTML = app.template();
-
-  if (app.setEventHandlers) {
+  if (app?.template) {
+    document.getElementById("root").innerHTML = app.template();
+  }
+  if (app?.setEventHandlers) {
     app.setEventHandlers();
   }
 
