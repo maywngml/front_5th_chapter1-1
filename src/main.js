@@ -1,12 +1,19 @@
 import { HomePage, ProfilePage, LoginPage, NotFoundPage } from "./pages";
+import { getUser } from "./utils/auth";
 
 const App = () => {
+  const user = getUser();
+
   if (location.pathname === "/") {
     return HomePage();
   } else if (location.pathname === "/login") {
     return LoginPage();
   } else if (location.pathname === "/profile") {
-    return ProfilePage();
+    if (user) {
+      return ProfilePage();
+    } else {
+      history.pushState(null, "", "/login");
+    }
   } else {
     return NotFoundPage();
   }
