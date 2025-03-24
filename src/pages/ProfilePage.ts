@@ -1,11 +1,14 @@
 import { Header, Footer } from "@/components/common";
 // TODO: 공통 레이아웃 폴더, 파일 만들어서 적용
 const ProfilePage = () => {
+  const { template: HeaderTemplate, setEventHandlers: setHeaderEventHandlers } =
+    Header();
+
   const template = () => /* HTML */ `
     <div id="root">
       <div class="bg-gray-100 min-h-screen flex justify-center">
         <div class="max-w-md w-full">
-          ${Header()}
+          ${HeaderTemplate()}
           <main class="p-4">
             <div class="bg-white p-8 rounded-lg shadow-md">
               <h2 class="text-2xl font-bold text-center text-blue-600 mb-8">
@@ -69,7 +72,10 @@ const ProfilePage = () => {
       </div>
     </div>
   `;
-  return { template };
+  const setEventHandlers = () => {
+    setHeaderEventHandlers();
+  };
+  return { template, setEventHandlers };
 };
 
 export default ProfilePage;

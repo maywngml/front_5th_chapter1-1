@@ -1,10 +1,13 @@
 import { Header, Footer } from "@/components/common";
 // TODO: 공통 레이아웃 폴더, 파일 만들어서 적용
 const HomePage = () => {
+  const { template: HeaderTemplate, setEventHandlers: setHeaderEventHandlers } =
+    Header();
+
   const template = () => /* HTML */ `
     <div class="bg-gray-100 min-h-screen flex justify-center">
       <div class="max-w-md w-full">
-        ${Header()}
+        ${HeaderTemplate()}
         <main class="p-4">
           <div class="mb-4 bg-white rounded-lg shadow p-4">
             <textarea
@@ -123,7 +126,11 @@ const HomePage = () => {
       </div>
     </div>
   `;
-  return { template };
+
+  const setEventHandlers = () => {
+    setHeaderEventHandlers();
+  };
+  return { template, setEventHandlers };
 };
 
 export default HomePage;
