@@ -2,15 +2,48 @@ import { useUserStore } from "@/store";
 
 const Nav = () => {
   const userStore = useUserStore();
+  const pathname = location.pathname;
+  const status = userStore.user ? "loggedIn" : "logout";
+  const menus = {
+    loggedIn: [
+      {
+        href: "/",
+        id: "home",
+        title: "홈",
+      },
+      {
+        href: "/profile",
+        id: "profile",
+        title: "프로필",
+      },
+      {
+        href: "/login",
+        id: "logout",
+        title: "로그아웃",
+      },
+    ],
+    logout: [
+      {
+        href: "/",
+        id: "home",
+        title: "홈",
+      },
+      {
+        href: "/login",
+        id: "/login",
+        title: "로그인",
+      },
+    ],
+  };
 
   return /* HTML */ `<nav class="bg-white shadow-md p-2 sticky top-14">
     <ul class="flex justify-around">
-      ${userStore.user
-        ? `<li><a href="/" class="text-blue-600">홈</a></li>
-      <li><a href="/profile" class="text-gray-600">프로필</a></li>
-      <li><a href="/login" class="text-gray-600" id="logout">로그아웃</a></li>`
-        : `<li><a href="/" class="text-blue-600">홈</a></li>
-      <li><a href="/login" class="text-gray-600">로그인</a></li>`}
+      ${menus[status]
+        .map(
+          ({ href, id, title }) =>
+            `<li><a href="${href}" id=${id} class="text-${pathname === href ? "blue" : "gray"}-600">${title}</a></li>`,
+        )
+        .join("")}
     </ul>
   </nav>`;
 };
