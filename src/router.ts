@@ -27,7 +27,11 @@ export default class Router {
     let pathname = location.pathname;
 
     if (pathname === "/profile" && !userStore.user) {
+      history.pushState(null, "", "/login");
       pathname = "/login";
+    } else if (pathname === "/login" && userStore.user) {
+      history.pushState(null, "", "/");
+      pathname = "/";
     }
 
     const App = this.ROUTES[pathname]
