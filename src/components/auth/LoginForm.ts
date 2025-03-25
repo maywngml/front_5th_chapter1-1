@@ -1,7 +1,9 @@
 import { useUserStore } from "@/store";
+import Router from "@/router";
 
 const LoginForm = () => {
   const userStore = useUserStore();
+  const router = new Router();
 
   const template = () =>
     /* HTML */ ` <form id="login-form">
@@ -45,7 +47,7 @@ const LoginForm = () => {
       } else {
         userStore.login(usernameValue.toString());
 
-        history.pushState(null, "", "/");
+        router.navigate("/");
       }
     };
 
