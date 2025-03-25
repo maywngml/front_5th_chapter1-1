@@ -1,7 +1,7 @@
-import { getUser, updateUser } from "@/utils/auth";
+import { useUserStore } from "@/store";
 
 const ProfileForm = () => {
-  const user = getUser();
+  const userStore = useUserStore();
 
   const template = /* HTML */ ` <form id="profile-form">
     <div class="mb-4">
@@ -12,7 +12,7 @@ const ProfileForm = () => {
         type="text"
         id="username"
         name="username"
-        value="${user?.username}"
+        value="${userStore.user?.username}"
         class="w-full p-2 border rounded"
       />
     </div>
@@ -24,7 +24,7 @@ const ProfileForm = () => {
         type="email"
         id="email"
         name="email"
-        value="${user?.email}"
+        value="${userStore.user?.email}"
         class="w-full p-2 border rounded"
       />
     </div>
@@ -33,7 +33,7 @@ const ProfileForm = () => {
         >자기소개</label
       >
       <textarea id="bio" name="bio" rows="4" class="w-full p-2 border rounded">
-${user?.bio}</textarea
+${userStore.user?.bio}</textarea
       >
     </div>
     <button
@@ -58,7 +58,7 @@ ${user?.bio}</textarea
       if (!usernameValue) {
         alert("사용자 이름을 입력해주세요.");
       } else {
-        updateUser({
+        userStore.updateUser({
           username: usernameValue.toString(),
           email: emailValue ? emailValue.toString() : "",
           bio: bioValue ? bioValue.toString() : "",

@@ -1,8 +1,8 @@
-export { default as LoginForm } from "./LoginForm";
-
-import { login } from "@/utils/auth";
+import { useUserStore } from "@/store";
 
 const LoginForm = () => {
+  const userStore = useUserStore();
+
   const template = () =>
     /* HTML */ ` <form id="login-form">
       <div class="mb-4">
@@ -43,7 +43,7 @@ const LoginForm = () => {
       if (!usernameValue) {
         alert("사용자 이름이 입력되지 않았습니다.");
       } else {
-        login(usernameValue.toString());
+        userStore.login(usernameValue.toString());
 
         history.pushState(null, "", "/");
       }
