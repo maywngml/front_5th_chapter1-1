@@ -1,7 +1,7 @@
 import { useUserStore } from "@/store";
 import ROUTES from "@/data/routes";
 
-export default class Router {
+export default class BrowserRouter {
   ROUTES: any;
   pageId: string;
 
@@ -32,7 +32,6 @@ export default class Router {
       ? this.ROUTES[this.pageId].page
       : this.ROUTES["error"].page;
     const app = App();
-    console.log(app, this.pageId);
     const root = document.getElementById("root");
 
     if (root) {

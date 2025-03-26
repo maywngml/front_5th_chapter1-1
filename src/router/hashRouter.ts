@@ -1,7 +1,7 @@
 import { useUserStore } from "@/store";
 import ROUTES from "@/data/routes";
 
-export default class Router {
+export default class HashRouter {
   ROUTES: any;
   pageId = "/";
   hash: string;
