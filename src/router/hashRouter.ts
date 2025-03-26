@@ -48,15 +48,15 @@ export default class HashRouter {
       app.setEventHandlers();
     }
 
-    document.querySelectorAll("a").forEach((el) => {
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (e.target) {
-          const target = e.target as HTMLAnchorElement;
+    document.querySelector("nav")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (e.target) {
+        const target = e.target as HTMLAnchorElement;
+        if (target.nodeName === "A") {
           const newPathName = target.href.replace(location.origin, "");
           this.navigate(newPathName);
         }
-      });
+      }
     });
   }
 
