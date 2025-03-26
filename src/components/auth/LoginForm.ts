@@ -1,8 +1,9 @@
 import { useUserStore } from "@/store";
-import Router from "@/router";
+import getRouter from "@/router/router";
 
 const LoginForm = () => {
   const userStore = useUserStore();
+  const Router = getRouter();
   const router = new Router();
 
   const template = () =>
