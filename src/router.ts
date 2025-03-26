@@ -1,5 +1,5 @@
 import { useUserStore } from "@/store";
-import ROUTES from "./router/routes";
+import ROUTES from "./data/routes";
 
 export default class Router {
   ROUTES: any;
