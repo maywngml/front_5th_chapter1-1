@@ -1,4 +1,4 @@
-import Router from "./router";
+import Router from "./router/browserRouter";
 
 const router = new Router();
 

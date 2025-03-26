@@ -1,33 +1,34 @@
 import { useUserStore } from "@/store";
-import ROUTES from "./router/routes";
+import ROUTES from "./routes";
 
 export default class Router {
   ROUTES: any;
-  pathname: string;
+  pageId = "/";
+  hash: string;
 
   constructor() {
     this.ROUTES = ROUTES;
-    this.pathname = "/";
+    this.pageId = "/";
+    this.hash = "/";
   }
 
   init() {
     const userStore = useUserStore();
-    let pathname = location.pathname;
+    let hash = location.hash;
+    let newHash = hash.includes("#") ? hash : `#${hash}`;
 
-    if (pathname === "/profile" && !userStore.user) {
-      history.pushState(null, "", "/login");
-      pathname = "/login";
-    } else if (pathname === "/login" && userStore.user) {
-      history.pushState(null, "", "/");
-      pathname = "/";
+    if (hash === "/profile" && !userStore.user) {
+      hash = "/login";
+    } else if (hash === "/login" && userStore.user) {
+      hash = "/";
     }
   }
 
   render() {
     this.init();
 
-    const App = this.ROUTES[this.pathname]
-      ? this.ROUTES[this.pathname].page
+    const App = this.ROUTES[this.hash]
+      ? this.ROUTES[this.hash].page
       : this.ROUTES["/error"].page;
     const app = App();
     const root = document.getElementById("root");
@@ -52,9 +53,10 @@ export default class Router {
     });
   }
 
-  navigate(pathname: string) {
-    if (pathname !== window.location.pathname) {
-      history.pushState(null, "", pathname);
+  navigate(hash: string) {
+    let newHash = hash.includes("#") ? hash : `#${hash}`;
+    if (hash !== location.hash) {
+      location.hash = newHash;
       this.render();
     }
   }

@@ -1,13 +1,13 @@
 import { useUserStore } from "@/store";
-import ROUTES from "./router/routes";
+import ROUTES from "./routes";
 
 export default class Router {
   ROUTES: any;
-  pathname: string;
+  pageId: string;
 
   constructor() {
     this.ROUTES = ROUTES;
-    this.pathname = "/";
+    this.pageId = "home";
   }
 
   init() {
@@ -16,20 +16,23 @@ export default class Router {
 
     if (pathname === "/profile" && !userStore.user) {
       history.pushState(null, "", "/login");
-      pathname = "/login";
+      this.pageId = "login";
     } else if (pathname === "/login" && userStore.user) {
       history.pushState(null, "", "/");
-      pathname = "/";
+      this.pageId = "home";
+    } else {
+      this.pageId = pathname === "/" ? "home" : pathname.replace("/", "");
     }
   }
 
   render() {
     this.init();
-
-    const App = this.ROUTES[this.pathname]
-      ? this.ROUTES[this.pathname].page
-      : this.ROUTES["/error"].page;
+    console.log(this.pageId);
+    const App = this.ROUTES[this.pageId]
+      ? this.ROUTES[this.pageId].page
+      : this.ROUTES["error"].page;
     const app = App();
+    console.log(app, this.pageId);
     const root = document.getElementById("root");
 
     if (root) {
