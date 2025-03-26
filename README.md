@@ -2,8 +2,8 @@
 
 ### 배포 링크
 
-1. browser router: https://maywngml.github.io/front_5th_chapter1-1/
-2. hash router: https://maywngml.github.io/front_5th_chapter1-1/index.hash.html
+1. 브라우저 라우터: https://maywngml.github.io/front_5th_chapter1-1/
+2. 해시 라우터: https://maywngml.github.io/front_5th_chapter1-1/index.hash.html
 
 ### 기본과제
 
