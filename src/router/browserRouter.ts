@@ -18,8 +18,6 @@ export default class BrowserRouter {
     const splittedPathname = location.pathname.split("/");
     const pathname = splittedPathname[splittedPathname.length - 1];
 
-    console.log("test", splittedPathname, pathname);
-
     if (pathname === "profile" && !userStore.user) {
       history.pushState(null, "", `${this.prefix}/login`);
       this.pageId = "login";
@@ -33,7 +31,6 @@ export default class BrowserRouter {
 
   render() {
     this.init();
-    console.log(this.pageId);
     const App = this.ROUTES[this.pageId]
       ? this.ROUTES[this.pageId].page
       : this.ROUTES["error"].page;
