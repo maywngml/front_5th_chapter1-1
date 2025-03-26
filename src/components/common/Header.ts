@@ -3,6 +3,9 @@ import { useUserStore } from "@/store";
 const Nav = () => {
   const userStore = useUserStore();
   const pathname = location.pathname;
+  const currentHref = pathname.includes("index")
+    ? location.hash.slice(1)
+    : pathname;
   const status = userStore.user ? "loggedIn" : "logout";
   const menus = {
     loggedIn: [
@@ -41,7 +44,7 @@ const Nav = () => {
       ${menus[status]
         .map(
           ({ href, id, title }) =>
-            `<li><a href="${href}" id=${id} class="text-${pathname === href ? "blue" : "gray"}-600">${title}</a></li>`,
+            `<li><a href="${href}" id=${id} class="${currentHref === href ? "font-bold text-blue-600" : "text-gray-600"}">${title}</a></li>`,
         )
         .join("")}
     </ul>
