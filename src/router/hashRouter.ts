@@ -3,33 +3,40 @@ import ROUTES from "@/data/routes";
 
 export default class HashRouter {
   ROUTES: any;
-  pageId = "/";
-  hash: string;
+  pageId: string;
 
   constructor() {
     this.ROUTES = ROUTES;
-    this.pageId = "/";
-    this.hash = "/";
+    this.pageId = "home";
   }
 
   init() {
     const userStore = useUserStore();
-    let hash = location.hash;
-    let newHash = hash.includes("#") ? hash : `#${hash}`;
+    const currentHash = location.hash;
+    let newHash = currentHash;
 
-    if (hash === "/profile" && !userStore.user) {
-      hash = "/login";
-    } else if (hash === "/login" && userStore.user) {
-      hash = "/";
+    if (currentHash === "#/profile" && !userStore.user) {
+      this.pageId = "login";
+      newHash = "#/login";
+    } else if (
+      (currentHash === "#/login" && userStore.user) ||
+      currentHash === "#/" ||
+      currentHash === ""
+    ) {
+      this.pageId = "home";
+      newHash = "#/";
+    } else {
+      this.pageId = currentHash.slice(2);
     }
+    location.hash = newHash;
   }
 
   render() {
     this.init();
 
-    const App = this.ROUTES[this.hash]
-      ? this.ROUTES[this.hash].page
-      : this.ROUTES["/error"].page;
+    const App = this.ROUTES[this.pageId]
+      ? this.ROUTES[this.pageId].page
+      : this.ROUTES["error"].page;
     const app = App();
     const root = document.getElementById("root");
 

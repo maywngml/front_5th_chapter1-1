@@ -4,7 +4,11 @@ import { setRouterType } from "./router/router";
 setRouterType("hash");
 const router = new Router();
 
-window.addEventListener("popstate", () => {
+addEventListener("popstate", () => {
+  router.render();
+});
+
+addEventListener("hashchange", () => {
   router.render();
 });
 
