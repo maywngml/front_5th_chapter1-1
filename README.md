@@ -1,6 +1,8 @@
 ## 과제 체크포인트
 
 ### 배포 링크
+1. browser router: https://maywngml.github.io/front_5th_chapter1-1/
+2. hash router: https://maywngml.github.io/front_5th_chapter1-1/index.hash.html
 
 ### 기본과제
 
