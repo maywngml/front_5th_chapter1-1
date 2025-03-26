@@ -1,10 +1,7 @@
 import { resolve } from "path";
 import { defineConfig } from "vitest/config";
 
-const isCI = process.env.CI === "true";
-
 export default defineConfig({
-  base: isCI ? "/" : "/front_5th_chapter1-1/",
   build: {
     rollupOptions: {
       input: {

@@ -1,3 +1,5 @@
+export const DEPLOYED_PREFIX = "/front_5th_chapter1-1";
+
 export const MOCK_POSTS = [
   {
     author: "홍길동",

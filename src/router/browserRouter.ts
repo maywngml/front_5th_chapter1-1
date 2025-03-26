@@ -1,27 +1,31 @@
 import { useUserStore } from "@/store";
 import ROUTES from "@/data/routes";
-
+import { DEPLOYED_PREFIX } from "@/utils/data";
 export default class BrowserRouter {
   ROUTES: any;
   pageId: string;
+  prefix: string;
 
   constructor() {
     this.ROUTES = ROUTES;
     this.pageId = "home";
+    this.prefix =
+      location.pathname.indexOf(DEPLOYED_PREFIX) === 0 ? DEPLOYED_PREFIX : "";
   }
 
   init() {
     const userStore = useUserStore();
-    let pathname = location.pathname;
+    const splittedPathname = location.pathname.split("/");
+    const pathname = splittedPathname[splittedPathname.length - 1];
 
-    if (pathname === "/profile" && !userStore.user) {
-      history.pushState(null, "", "/login");
+    if (pathname === "profile" && !userStore.user) {
+      history.pushState(null, "", `${this.prefix}/login`);
       this.pageId = "login";
-    } else if (pathname === "/login" && userStore.user) {
-      history.pushState(null, "", "/");
+    } else if (pathname === "login" && userStore.user) {
+      history.pushState(null, "", `${this.prefix}/`);
       this.pageId = "home";
     } else {
-      this.pageId = pathname === "/" ? "home" : pathname.replace("/", "");
+      this.pageId = pathname === "" ? "home" : pathname;
     }
   }
 
@@ -56,7 +60,7 @@ export default class BrowserRouter {
 
   navigate(pathname: string) {
     if (pathname !== window.location.pathname) {
-      history.pushState(null, "", pathname);
+      history.pushState(null, "", `${this.prefix}${pathname}`);
       this.render();
     }
   }

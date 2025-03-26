@@ -3,9 +3,11 @@ import { useUserStore } from "@/store";
 const Nav = () => {
   const userStore = useUserStore();
   const pathname = location.pathname;
-  const currentHref = pathname.includes("index")
-    ? location.hash.slice(1)
-    : pathname;
+  const hash = location.hash;
+  const splittedPathname = pathname.split("/");
+  const currentHref = hash
+    ? hash.slice(1)
+    : `/${splittedPathname[splittedPathname.length - 1]}`;
   const status = userStore.user ? "loggedIn" : "logout";
   const menus = {
     loggedIn: [
