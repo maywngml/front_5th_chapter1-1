@@ -3,8 +3,8 @@ import getRouter from "@/router/router";
 
 const LoginForm = () => {
   const userStore = useUserStore();
-  const Router = getRouter();
-  const router = new Router();
+  const Router = getRouter(); // 라우터 클래스 가져오기
+  const router = new Router(); // 라우터 클래스의 인스턴스 생성해서 사용
 
   const template = () =>
     /* HTML */ ` <form id="login-form">
